@@ -1,4 +1,4 @@
-package com.rizqanmr.moviku
+package com.rizqanmr.moviku.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
