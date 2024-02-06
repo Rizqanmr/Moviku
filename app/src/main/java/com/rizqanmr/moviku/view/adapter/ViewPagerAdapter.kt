@@ -1,4 +1,4 @@
-package com.rizqanmr.moviku.view.main
+package com.rizqanmr.moviku.view.adapter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.rizqanmr.moviku.network.model.GenresItem
-import com.rizqanmr.moviku.utils.Constant.ARG_OBJECT
+import com.rizqanmr.moviku.utils.Constant.EXTRA_GENRE_ID
 import com.rizqanmr.moviku.view.discover.DiscoverFragment
 
 class ViewPagerAdapter(
@@ -31,7 +31,7 @@ class ViewPagerAdapter(
         val fragment = DiscoverFragment()
         val genre = genre[position]
         fragment.arguments = Bundle().apply {
-            genre.id?.let { putInt(ARG_OBJECT, it) }
+            genre.id?.let { putInt(EXTRA_GENRE_ID, it) }
         }
         return fragment
     }

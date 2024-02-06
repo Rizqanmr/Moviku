@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Moviku</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="poster_movie">Poster Movie</string>
     <string name="try_again">Try Again</string>
+    <string name="backdrop_movie">Backdrop Movie</string>
+    <string name="overview">Overview</string>
+    <string name="release_date">Release Date</string>
+    <string name="detail_movie">Detail Movie</string>
 </resources>

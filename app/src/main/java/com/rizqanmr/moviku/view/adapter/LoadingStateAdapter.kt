@@ -1,4 +1,4 @@
-package com.rizqanmr.moviku.view.discover
+package com.rizqanmr.moviku.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

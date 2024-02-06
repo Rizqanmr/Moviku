@@ -6,13 +6,17 @@ import androidx.fragment.app.viewModels
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rizqanmr.moviku.databinding.FragmentDiscoverBinding
 import com.rizqanmr.moviku.databinding.ItemMovieBinding
 import com.rizqanmr.moviku.network.model.ItemMovieModel
-import com.rizqanmr.moviku.utils.Constant.ARG_OBJECT
+import com.rizqanmr.moviku.utils.Constant
+import com.rizqanmr.moviku.view.adapter.DiscoverMovieAdapter
+import com.rizqanmr.moviku.view.adapter.LoadingStateAdapter
+import com.rizqanmr.moviku.view.moviedetail.MovieDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,8 +36,8 @@ class DiscoverFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
-            viewModel.setExtraData(getInt(ARG_OBJECT))
+        arguments?.takeIf { it.containsKey(Constant.EXTRA_GENRE_ID) }?.apply {
+            viewModel.setExtraData(getInt(Constant.EXTRA_GENRE_ID))
         }
 
         setupObservers()
@@ -57,7 +61,13 @@ class DiscoverFragment : Fragment() {
 
         discoverMovieAdapter.setMovieListener(object : DiscoverMovieAdapter.MovieListener {
             override fun onItemClick(itemMovieBinding: ItemMovieBinding, movie: ItemMovieModel?) {
-                Toast.makeText(requireContext(), "title: ${movie?.title}", Toast.LENGTH_SHORT).show()
+                val optionCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        requireActivity(),
+                        Pair(itemMovieBinding.ivMovie, "poster")
+                    )
+                MovieDetailActivity.newIntent(this@DiscoverFragment, optionCompat.toBundle()
+                    ?.apply { putParcelable(Constant.EXTRA_MOVIE, movie) })
             }
         })
     }

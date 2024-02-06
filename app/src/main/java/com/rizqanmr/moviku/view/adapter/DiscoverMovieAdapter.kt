@@ -1,4 +1,4 @@
-package com.rizqanmr.moviku.view.discover
+package com.rizqanmr.moviku.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,9 @@ import com.rizqanmr.moviku.databinding.ItemMovieBinding
 import com.rizqanmr.moviku.network.model.ItemMovieModel
 import com.rizqanmr.moviku.utils.setFitImageUrl
 
-class DiscoverMovieAdapter : PagingDataAdapter<ItemMovieModel, DiscoverMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
+class DiscoverMovieAdapter : PagingDataAdapter<ItemMovieModel, DiscoverMovieAdapter.MovieViewHolder>(
+    DIFF_CALLBACK
+) {
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ItemMovieModel>() {

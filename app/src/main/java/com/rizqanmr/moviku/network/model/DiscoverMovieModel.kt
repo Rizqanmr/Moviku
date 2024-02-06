@@ -2,8 +2,10 @@ package com.rizqanmr.moviku.network.model
 
 
 import android.annotation.SuppressLint
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.rizqanmr.moviku.utils.Constant.URL_IMAGE
+import com.rizqanmr.moviku.utils.Constant
+import kotlinx.parcelize.Parcelize
 import java.text.SimpleDateFormat
 import java.math.*
 
@@ -14,7 +16,7 @@ data class DiscoverMovieModel(
     @SerializedName("total_results") val totalResults: Int = 0
 )
 
-
+@Parcelize
 data class ItemMovieModel(
     @SerializedName("overview") val overview: String = "",
     @SerializedName("original_language") val originalLanguage: String = "",
@@ -30,7 +32,7 @@ data class ItemMovieModel(
     @SerializedName("id") val id: Int = 0,
     @SerializedName("adult") val adult: Boolean = false,
     @SerializedName("vote_count") val voteCount: Int = 0
-) {
+) : Parcelable {
     @SuppressLint("SimpleDateFormat")
     fun getFormattedDate(): String? {
         return try {
@@ -52,7 +54,11 @@ data class ItemMovieModel(
     }
 
     fun getUrlPoster(): String {
-        return URL_IMAGE + posterPath
+        return Constant.URL_POSTER + posterPath
+    }
+
+    fun getUrlBackdrop(): String {
+        return Constant.URL_BACKDROP + backdropPath
     }
 }
 
