@@ -19,12 +19,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        subscribeToLiveData()
+        setupObservers()
         setupViewPage()
         viewModel.getGenres()
     }
 
-    private fun subscribeToLiveData() {
+    private fun setupObservers() {
         viewModel.genres.observe(this) {
             if (it.genres?.isNotEmpty() == true) {
                 viewPagerAdapter.setGenre(it.genres)

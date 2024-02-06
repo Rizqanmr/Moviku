@@ -1,90 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cvMovie"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/dp350"
-    app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="@dimen/dp8"
-    app:cardElevation="@dimen/dp4"
-    app:cardMaxElevation="@dimen/dp4"
-    app:cardUseCompatPadding="true">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.rizqanmr.moviku.network.model.ItemMovieModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvMovie"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/dp350"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp8"
+        app:cardElevation="@dimen/dp4"
+        app:cardMaxElevation="@dimen/dp4"
+        app:cardUseCompatPadding="true">
 
-        <ImageView
-            android:id="@+id/ivMovie"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp250"
-            android:contentDescription="@string/poster_movie"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0"
-            tools:src="@tools:sample/avatars" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp8"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:paddingHorizontal="@dimen/dp16"
-            android:textAlignment="center"
-            android:textSize="@dimen/sp18"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivMovie"
-            tools:text="Movie Title Movie Title Movie " />
+            <ImageView
+                android:id="@+id/ivMovie"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp250"
+                android:contentDescription="@string/poster_movie"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0"
+                tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/tvReleaseDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/dp4"
-            android:paddingHorizontal="@dimen/dp16"
-            android:textSize="@dimen/sp14"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
-            app:layout_constraintVertical_bias="0"
-            tools:text="06 Feb 2024" />
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:paddingHorizontal="@dimen/dp16"
+                android:text="@{item.title}"
+                android:textAlignment="center"
+                android:textSize="@dimen/sp14"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivMovie"
+                tools:text="Movie Title Movie Title Movie " />
 
-        <TextView
-            android:id="@+id/tvRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/dp4"
-            android:paddingEnd="@dimen/dp16"
-            android:paddingStart="@dimen/dp4"
-            android:textSize="@dimen/sp14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
-            app:layout_constraintVertical_bias="0"
-            tools:text="7.5" />
+            <TextView
+                android:id="@+id/tvReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp4"
+                android:paddingHorizontal="@dimen/dp16"
+                android:text="@{item.formattedDate}"
+                android:textAlignment="center"
+                android:textSize="@dimen/sp12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:layout_constraintVertical_bias="0"
+                tools:text="06 Feb 2024" />
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:isIndicator="false"
-            android:progressTint="@color/dark_red"
-            android:progressBackgroundTint="@color/grey"
-            android:numStars="5"
-            android:stepSize="0.5"
-            android:rating="4.5"
-            app:layout_constraintBottom_toBottomOf="@id/tvRating"
-            app:layout_constraintEnd_toStartOf="@id/tvRating"
-            app:layout_constraintTop_toTopOf="@id/tvRating"/>
+            <RelativeLayout
+                android:id="@+id/rl_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white_50"
+                app:layout_constraintBottom_toBottomOf="@id/ivMovie"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/light_red"
+                    android:paddingVertical="@dimen/dp4"
+                    android:paddingHorizontal="@dimen/dp8"
+                    android:text="@{item.rating}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp12"
+                    android:textStyle="bold"
+                    tools:text="7.5" />
 
-</androidx.cardview.widget.CardView>
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp4"
+                    android:layout_toStartOf="@id/tvRating"
+                    android:isIndicator="false"
+                    android:progressTint="@color/dark_red"
+                    android:progressBackgroundTint="@color/black"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:rating="@{item.ratingStar}" />
+
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
