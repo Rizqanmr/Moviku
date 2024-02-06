@@ -24,7 +24,7 @@ class DiscoverFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
-            binding.tvFragment.text = getInt(ARG_OBJECT).toString()
+            //binding.tvFragment.text = getInt(ARG_OBJECT).toString()
         }
     }
 }
