@@ -8,4 +8,8 @@
     <string name="release_date">Release Date</string>
     <string name="detail_movie">Detail Movie</string>
     <string name="official_trailer">Official Trailer</string>
+    <string name="review">Reviews</string>
+    <string name="reviewer_avatar">Reviewer Avatar</string>
+    <string name="read_all_review">Read All Review</string>
+    <string name="no_data_available">No data available</string>
 </resources>

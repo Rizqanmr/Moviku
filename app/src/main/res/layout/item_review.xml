@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        
+        <variable
+            name="item"
+            type="com.rizqanmr.moviku.network.model.ReviewItem" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp8"
+        app:cardElevation="@dimen/dp4"
+        app:cardMaxElevation="@dimen/dp4"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp8">
+
+            <ImageView
+                android:id="@+id/ivReviewer"
+                android:layout_width="@dimen/dp40"
+                android:layout_height="@dimen/dp40"
+                android:contentDescription="@string/reviewer_avatar"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/tvReviewerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp8"
+                android:text="@{item.authorDetails.reviewerName}"
+                android:textSize="@dimen/sp16"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivReviewer"
+                tools:text="Reviewer Name" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp8"
+                android:isIndicator="false"
+                android:progressTint="@color/dark_red"
+                android:progressBackgroundTint="@color/black"
+                android:numStars="1"
+                android:stepSize="1"
+                android:rating="1"
+                app:layout_constraintStart_toEndOf="@id/ivReviewer"
+                app:layout_constraintTop_toBottomOf="@id/tvReviewerName"/>
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.authorDetails.ratingUser}"
+                android:textSize="@dimen/sp12"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/ratingBar"
+                app:layout_constraintTop_toBottomOf="@id/tvReviewerName"
+                tools:text="7.5" />
+
+            <TextView
+                android:id="@+id/tvReviewDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp4"
+                android:text="@{item.formattedDate}"
+                android:textSize="@dimen/sp12"
+                app:layout_constraintStart_toEndOf="@id/tvRating"
+                app:layout_constraintTop_toBottomOf="@id/tvReviewerName"
+                tools:text="on January 26, 2024" />
+
+            <TextView
+                android:id="@+id/tvReviewContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:paddingHorizontal="@dimen/dp6"
+                android:text="@{item.content}"
+                android:textSize="@dimen/sp14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivReviewer"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Review review review" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

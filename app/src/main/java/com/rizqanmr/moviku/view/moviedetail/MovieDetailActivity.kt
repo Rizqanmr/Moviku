@@ -9,7 +9,10 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -19,6 +22,9 @@ import com.rizqanmr.moviku.network.model.DetailMovieModel
 import com.rizqanmr.moviku.network.model.ItemMovieModel
 import com.rizqanmr.moviku.utils.Constant
 import com.rizqanmr.moviku.utils.setFitImageUrl
+import com.rizqanmr.moviku.view.adapter.LoadingStateAdapter
+import com.rizqanmr.moviku.view.adapter.ReviewAdapter
+import com.rizqanmr.moviku.view.review.ReviewActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,6 +42,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailBinding
     private val viewModel by viewModels<MovieDetailViewModel>()
+    private val reviewAdapter by lazy { ReviewAdapter() }
     private var movie: ItemMovieModel? = null
     private var detailMovie: DetailMovieModel? = null
 
@@ -65,6 +72,9 @@ class MovieDetailActivity : AppCompatActivity() {
         viewModel.detail.observe(this) {
             detailMovie = it
         }
+        viewModel.getReviews().observe(this) {
+            reviewAdapter.submitData(lifecycle, it)
+        }
     }
 
     private fun setupViewPage() {
@@ -86,6 +96,19 @@ class MovieDetailActivity : AppCompatActivity() {
             ratingBar.rating = movie?.getRatingStar()!!
             tvOverview.text = movie?.overview
             tvReleaseDate.text = movie?.getFormattedDate()
+            tvReadAllReview.setOnClickListener {
+                ReviewActivity.newIntent(this@MovieDetailActivity, bundleOf().apply {
+                    putInt(Constant.EXTRA_MOVIE_ID, movie?.id!!)
+                })
+            }
+
+            rvReview.apply {
+                layoutManager = LinearLayoutManager(this@MovieDetailActivity, RecyclerView.HORIZONTAL, false)
+                setHasFixedSize(true)
+                adapter = reviewAdapter.withLoadStateHeader(
+                    header = LoadingStateAdapter { reviewAdapter.retry() }
+                )
+            }
         }
 
         setupYoutubePlayerView()

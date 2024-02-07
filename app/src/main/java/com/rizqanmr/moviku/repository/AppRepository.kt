@@ -4,6 +4,7 @@ import com.rizqanmr.moviku.datasources.RemoteDataSource
 import com.rizqanmr.moviku.network.model.DetailMovieModel
 import com.rizqanmr.moviku.network.model.DiscoverMovieModel
 import com.rizqanmr.moviku.network.model.GenresModel
+import com.rizqanmr.moviku.network.model.ReviewsModel
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(private val remoteDataSource: RemoteDataSource) {
@@ -17,5 +18,9 @@ class AppRepository @Inject constructor(private val remoteDataSource: RemoteData
 
     suspend fun getDetailMovie(movieId: Int?) : DetailMovieModel? {
         return remoteDataSource.getDetailMovie(movieId)
+    }
+
+    suspend fun getReview(movieId: Int?, page: Int) : ReviewsModel? {
+        return remoteDataSource.getReviews(movieId, page)
     }
 }

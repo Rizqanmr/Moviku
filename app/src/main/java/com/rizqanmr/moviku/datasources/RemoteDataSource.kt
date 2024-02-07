@@ -4,6 +4,7 @@ import com.rizqanmr.moviku.network.ApiService
 import com.rizqanmr.moviku.network.model.DetailMovieModel
 import com.rizqanmr.moviku.network.model.DiscoverMovieModel
 import com.rizqanmr.moviku.network.model.GenresModel
+import com.rizqanmr.moviku.network.model.ReviewsModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -43,6 +44,17 @@ class RemoteDataSource @Inject constructor(
             try {
                 val movie = apiService.getDetailMovie(movieId, "videos")
                 movie
+            } catch (e: Exception) {
+                null
+            }
+        }
+    }
+
+    suspend fun getReviews(movieId: Int?, page: Int) : ReviewsModel? {
+        return withContext(coroutineContext) {
+            try {
+                val review = apiService.getReviews(movieId, page)
+                review
             } catch (e: Exception) {
                 null
             }

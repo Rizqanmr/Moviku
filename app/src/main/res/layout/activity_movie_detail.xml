@@ -168,6 +168,42 @@
                 app:autoPlay="false"
                 app:layout_constraintTop_toBottomOf="@id/tvTrailerTitle"/>
 
+            <TextView
+                android:id="@+id/tvReviewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp16"
+                android:text="@string/review"
+                android:textSize="@dimen/sp16"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/ivPoster"
+                app:layout_constraintTop_toBottomOf="@id/youtubePlayerView" />
+
+            <TextView
+                android:id="@+id/tvReadAllReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp16"
+                android:text="@string/read_all_review"
+                android:textColor="@color/dark_red"
+                android:textSize="@dimen/sp14"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/tvReviewTitle" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/dp4"
+                android:paddingHorizontal="@dimen/dp8"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                app:layout_constraintStart_toStartOf="@id/tvReviewTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvReviewTitle"
+                tools:listitem="@layout/item_review"
+                tools:itemCount="1" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Moviku"
         tools:targetApi="31">
         <activity
+            android:name=".view.review.ReviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.moviedetail.MovieDetailActivity"
             android:exported="false" />
         <activity
