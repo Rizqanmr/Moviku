@@ -147,7 +147,26 @@
                 app:layout_constraintStart_toStartOf="@id/tvOverviewTitle"
                 app:layout_constraintTop_toBottomOf="@id/tvReleaseTitle"
                 app:layout_constraintHorizontal_bias="0"
-                tools:text="Overview Text" />
+                tools:text="23 Feb 2024" />
+
+            <TextView
+                android:id="@+id/tvTrailerTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp16"
+                android:text="@string/official_trailer"
+                android:textSize="@dimen/sp16"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/ivPoster"
+                app:layout_constraintTop_toBottomOf="@id/tvReleaseDate" />
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtubePlayerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp4"
+                app:autoPlay="false"
+                app:layout_constraintTop_toBottomOf="@id/tvTrailerTitle"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

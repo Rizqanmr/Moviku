@@ -1,6 +1,7 @@
 package com.rizqanmr.moviku.datasources
 
 import com.rizqanmr.moviku.network.ApiService
+import com.rizqanmr.moviku.network.model.DetailMovieModel
 import com.rizqanmr.moviku.network.model.DiscoverMovieModel
 import com.rizqanmr.moviku.network.model.GenresModel
 import kotlinx.coroutines.CoroutineScope
@@ -15,7 +16,7 @@ class RemoteDataSource @Inject constructor(
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO
 
-    suspend fun getGenres(): GenresModel {
+    suspend fun getGenres() : GenresModel {
         return withContext(coroutineContext) {
             try {
                 val genres = apiService.getGenres()
@@ -26,11 +27,22 @@ class RemoteDataSource @Inject constructor(
         }
     }
 
-    suspend fun getDiscoverMovies(page: Int, genreId: Int): DiscoverMovieModel? {
+    suspend fun getDiscoverMovies(page: Int, genreId: Int) : DiscoverMovieModel? {
         return withContext(coroutineContext) {
             try {
                 val movies = apiService.getDiscoverMovies(page, genreId)
                 movies
+            } catch (e: Exception) {
+                null
+            }
+        }
+    }
+
+    suspend fun getDetailMovie(movieId: Int?) : DetailMovieModel? {
+        return withContext(coroutineContext) {
+            try {
+                val movie = apiService.getDetailMovie(movieId, "videos")
+                movie
             } catch (e: Exception) {
                 null
             }

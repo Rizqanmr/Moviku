@@ -7,4 +7,5 @@
     <string name="overview">Overview</string>
     <string name="release_date">Release Date</string>
     <string name="detail_movie">Detail Movie</string>
+    <string name="official_trailer">Official Trailer</string>
 </resources>

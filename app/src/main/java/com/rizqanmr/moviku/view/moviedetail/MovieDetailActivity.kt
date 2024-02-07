@@ -7,14 +7,21 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.rizqanmr.moviku.R
 import com.rizqanmr.moviku.databinding.ActivityMovieDetailBinding
+import com.rizqanmr.moviku.network.model.DetailMovieModel
 import com.rizqanmr.moviku.network.model.ItemMovieModel
 import com.rizqanmr.moviku.utils.Constant
 import com.rizqanmr.moviku.utils.setFitImageUrl
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
 
     companion object {
@@ -28,7 +35,9 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMovieDetailBinding
+    private val viewModel by viewModels<MovieDetailViewModel>()
     private var movie: ItemMovieModel? = null
+    private var detailMovie: DetailMovieModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +50,21 @@ class MovieDetailActivity : AppCompatActivity() {
             intent.getParcelableExtra(Constant.EXTRA_MOVIE)
         }
 
+        viewModel.setExtraData(movie)
+        setupObservers()
         setupViewPage()
+        viewModel.getDetailMovie()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) finish()
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupObservers() {
+        viewModel.detail.observe(this) {
+            detailMovie = it
+        }
     }
 
     private fun setupViewPage() {
@@ -69,5 +87,24 @@ class MovieDetailActivity : AppCompatActivity() {
             tvOverview.text = movie?.overview
             tvReleaseDate.text = movie?.getFormattedDate()
         }
+
+        setupYoutubePlayerView()
     }
+
+    private fun setupYoutubePlayerView() {
+        val youTubePlayerView: YouTubePlayerView = binding.youtubePlayerView
+
+        lifecycle.addObserver(youTubePlayerView)
+
+        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                val videoItem = detailMovie?.videos?.results?.find { it.type == Constant.TRAILER }
+                val videoId = videoItem?.key.orEmpty()
+                youTubePlayer.apply {
+                    cueVideo(videoId, 0f)
+                }
+            }
+        })
+    }
+
 }
