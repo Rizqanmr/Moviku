@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
-        buildConfigField("String", "API_KEY", "\"89daa683b535898663563d2f3bc4d5e6\"")
+        buildConfigField("String", "API_KEY", "\"Enter your API Key\"")
         applicationId = "com.rizqanmr.moviku"
         minSdk = 23
         targetSdk = 34
