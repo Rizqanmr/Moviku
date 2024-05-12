@@ -22,8 +22,8 @@ import com.rizqanmr.moviku.network.model.DetailMovieModel
 import com.rizqanmr.moviku.network.model.ItemMovieModel
 import com.rizqanmr.moviku.utils.Constant
 import com.rizqanmr.moviku.utils.setFitImageUrl
-import com.rizqanmr.moviku.view.adapter.LoadingStateAdapter
-import com.rizqanmr.moviku.view.adapter.ReviewAdapter
+import com.rizqanmr.moviku.adapter.LoadingStateAdapter
+import com.rizqanmr.moviku.adapter.ReviewAdapter
 import com.rizqanmr.moviku.view.review.ReviewActivity
 import dagger.hilt.android.AndroidEntryPoint
 

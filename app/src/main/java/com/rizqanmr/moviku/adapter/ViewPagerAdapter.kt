@@ -1,4 +1,4 @@
-package com.rizqanmr.moviku.view.adapter
+package com.rizqanmr.moviku.adapter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rizqanmr.moviku.databinding.ActivityMainBinding
-import com.rizqanmr.moviku.view.adapter.ViewPagerAdapter
+import com.rizqanmr.moviku.adapter.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

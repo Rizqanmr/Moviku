@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.rizqanmr.moviku.R
 import com.rizqanmr.moviku.databinding.ActivityReviewBinding
 import com.rizqanmr.moviku.utils.Constant
-import com.rizqanmr.moviku.view.adapter.LoadingStateAdapter
-import com.rizqanmr.moviku.view.adapter.ReviewAdapter
+import com.rizqanmr.moviku.adapter.LoadingStateAdapter
+import com.rizqanmr.moviku.adapter.ReviewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

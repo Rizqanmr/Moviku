@@ -14,8 +14,8 @@ import com.rizqanmr.moviku.databinding.FragmentDiscoverBinding
 import com.rizqanmr.moviku.databinding.ItemMovieBinding
 import com.rizqanmr.moviku.network.model.ItemMovieModel
 import com.rizqanmr.moviku.utils.Constant
-import com.rizqanmr.moviku.view.adapter.DiscoverMovieAdapter
-import com.rizqanmr.moviku.view.adapter.LoadingStateAdapter
+import com.rizqanmr.moviku.adapter.DiscoverMovieAdapter
+import com.rizqanmr.moviku.adapter.LoadingStateAdapter
 import com.rizqanmr.moviku.view.moviedetail.MovieDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
