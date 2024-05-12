@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.core.view.isVisible
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rizqanmr.moviku.databinding.FragmentDiscoverBinding
@@ -51,12 +53,26 @@ class DiscoverFragment : Fragment() {
     }
 
     private fun setupViewPage() {
-        binding.rvMovie.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
-            setHasFixedSize(true)
-            adapter = discoverMovieAdapter.withLoadStateFooter(
-                footer = LoadingStateAdapter { discoverMovieAdapter.retry() }
-            )
+        with(binding) {
+            rvMovie.apply {
+                layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
+                setHasFixedSize(true)
+                discoverMovieAdapter.addLoadStateListener { loadState ->
+                    if (loadState.refresh is LoadState.Loading && discoverMovieAdapter.itemCount == 0) {
+                        isVisible = false
+                        pbLoading.isVisible = true
+                    } else if (loadState.refresh is LoadState.NotLoading && discoverMovieAdapter.itemCount == 0) {
+                        isVisible = false
+                        pbLoading.isVisible = false
+                    } else if (loadState.refresh is LoadState.NotLoading && discoverMovieAdapter.itemCount > 0) {
+                        isVisible = true
+                        pbLoading.isVisible = false
+                    }
+                }
+                adapter = discoverMovieAdapter.withLoadStateFooter(
+                    footer = LoadingStateAdapter { discoverMovieAdapter.retry() }
+                )
+            }
         }
 
         discoverMovieAdapter.setMovieListener(object : DiscoverMovieAdapter.MovieListener {
