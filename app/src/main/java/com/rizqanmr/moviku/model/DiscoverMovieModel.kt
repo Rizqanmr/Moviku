@@ -3,6 +3,8 @@ package com.rizqanmr.moviku.model
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.rizqanmr.moviku.utils.Constant
 import kotlinx.parcelize.Parcelize
@@ -16,6 +18,7 @@ data class DiscoverMovieModel(
     @SerializedName("total_results") val totalResults: Int = 0
 )
 
+@Entity(tableName = "movies")
 @Parcelize
 data class ItemMovieModel(
     @SerializedName("overview") val overview: String = "",
@@ -23,13 +26,12 @@ data class ItemMovieModel(
     @SerializedName("original_title") val originalTitle: String = "",
     @SerializedName("video") val video: Boolean = false,
     @SerializedName("title") val title: String = "",
-    @SerializedName("genre_ids") val genreIds: List<Int>?,
     @SerializedName("poster_path") val posterPath: String = "",
     @SerializedName("backdrop_path") val backdropPath: String = "",
     @SerializedName("release_date") val releaseDate: String = "",
     @SerializedName("popularity") val popularity: Double = 0.0,
     @SerializedName("vote_average") val voteAverage: Double = 0.0,
-    @SerializedName("id") val id: Int = 0,
+    @PrimaryKey @SerializedName("id") val id: Int = 0,
     @SerializedName("adult") val adult: Boolean = false,
     @SerializedName("vote_count") val voteCount: Int = 0
 ) : Parcelable {
