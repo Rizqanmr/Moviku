@@ -6,6 +6,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
 }
 
 //importing local.properties file
@@ -61,6 +62,7 @@ kapt {
 }
 
 dependencies {
+    val roomVersion = "2.6.1"
 
     // Android X
     implementation("androidx.core:core-ktx:1.12.0")
@@ -72,6 +74,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-paging:$roomVersion")
 
     // Material Google
     implementation("com.google.android.material:material:1.11.0")
