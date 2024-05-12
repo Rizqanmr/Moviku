@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rizqanmr.moviku.R
 import com.rizqanmr.moviku.databinding.ItemReviewBinding
-import com.rizqanmr.moviku.network.model.ReviewItem
+import com.rizqanmr.moviku.model.ReviewItem
 import com.rizqanmr.moviku.utils.setCircleImageUrl
 
 class ReviewAdapter : PagingDataAdapter<ReviewItem, ReviewAdapter.ReviewViewHolder>(DIFF_CALLBACK) {

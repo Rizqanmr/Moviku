@@ -1,4 +1,4 @@
-package com.rizqanmr.moviku.network.model
+package com.rizqanmr.moviku.model
 
 
 import com.google.gson.annotations.SerializedName

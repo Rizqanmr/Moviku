@@ -2,7 +2,7 @@ package com.rizqanmr.moviku.datasources
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.rizqanmr.moviku.network.model.ItemMovieModel
+import com.rizqanmr.moviku.model.ItemMovieModel
 import com.rizqanmr.moviku.repository.AppRepository
 
 class MoviePagingSource(

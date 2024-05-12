@@ -2,7 +2,7 @@ package com.rizqanmr.moviku.datasources
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.rizqanmr.moviku.network.model.ReviewItem
+import com.rizqanmr.moviku.model.ReviewItem
 import com.rizqanmr.moviku.repository.AppRepository
 
 class ReviewPagingSource(

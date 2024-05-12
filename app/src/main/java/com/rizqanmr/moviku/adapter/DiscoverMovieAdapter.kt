@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rizqanmr.moviku.R
 import com.rizqanmr.moviku.databinding.ItemMovieBinding
-import com.rizqanmr.moviku.network.model.ItemMovieModel
+import com.rizqanmr.moviku.model.ItemMovieModel
 import com.rizqanmr.moviku.utils.setFitImageUrl
 
 class DiscoverMovieAdapter : PagingDataAdapter<ItemMovieModel, DiscoverMovieAdapter.MovieViewHolder>(

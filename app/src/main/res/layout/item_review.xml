@@ -8,7 +8,7 @@
         
         <variable
             name="item"
-            type="com.rizqanmr.moviku.network.model.ReviewItem" />
+            type="com.rizqanmr.moviku.model.ReviewItem" />
     </data>
 
     <androidx.cardview.widget.CardView

@@ -1,10 +1,10 @@
 package com.rizqanmr.moviku.datasources
 
 import com.rizqanmr.moviku.network.ApiService
-import com.rizqanmr.moviku.network.model.DetailMovieModel
-import com.rizqanmr.moviku.network.model.DiscoverMovieModel
-import com.rizqanmr.moviku.network.model.GenresModel
-import com.rizqanmr.moviku.network.model.ReviewsModel
+import com.rizqanmr.moviku.model.DetailMovieModel
+import com.rizqanmr.moviku.model.DiscoverMovieModel
+import com.rizqanmr.moviku.model.GenresModel
+import com.rizqanmr.moviku.model.ReviewsModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

@@ -10,9 +10,9 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.liveData
 import com.rizqanmr.moviku.datasources.ReviewPagingSource
-import com.rizqanmr.moviku.network.model.DetailMovieModel
-import com.rizqanmr.moviku.network.model.ItemMovieModel
-import com.rizqanmr.moviku.network.model.ReviewItem
+import com.rizqanmr.moviku.model.DetailMovieModel
+import com.rizqanmr.moviku.model.ItemMovieModel
+import com.rizqanmr.moviku.model.ReviewItem
 import com.rizqanmr.moviku.repository.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.rizqanmr.moviku.network.model.GenresItem
+import com.rizqanmr.moviku.model.GenresItem
 import com.rizqanmr.moviku.utils.Constant.EXTRA_GENRE_ID
 import com.rizqanmr.moviku.view.discover.DiscoverFragment
 

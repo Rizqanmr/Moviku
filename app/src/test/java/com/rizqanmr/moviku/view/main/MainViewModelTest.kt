@@ -1,8 +1,8 @@
 package com.rizqanmr.moviku.view.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.rizqanmr.moviku.network.model.GenresItem
-import com.rizqanmr.moviku.network.model.GenresModel
+import com.rizqanmr.moviku.model.GenresItem
+import com.rizqanmr.moviku.model.GenresModel
 import com.rizqanmr.moviku.repository.AppRepository
 import io.mockk.coEvery
 import io.mockk.mockk

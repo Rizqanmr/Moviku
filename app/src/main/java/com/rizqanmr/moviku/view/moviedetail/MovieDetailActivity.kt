@@ -18,8 +18,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.rizqanmr.moviku.R
 import com.rizqanmr.moviku.databinding.ActivityMovieDetailBinding
-import com.rizqanmr.moviku.network.model.DetailMovieModel
-import com.rizqanmr.moviku.network.model.ItemMovieModel
+import com.rizqanmr.moviku.model.DetailMovieModel
+import com.rizqanmr.moviku.model.ItemMovieModel
 import com.rizqanmr.moviku.utils.Constant
 import com.rizqanmr.moviku.utils.setFitImageUrl
 import com.rizqanmr.moviku.adapter.LoadingStateAdapter

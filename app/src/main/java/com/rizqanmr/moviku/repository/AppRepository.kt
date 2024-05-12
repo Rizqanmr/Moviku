@@ -1,10 +1,10 @@
 package com.rizqanmr.moviku.repository
 
 import com.rizqanmr.moviku.datasources.RemoteDataSource
-import com.rizqanmr.moviku.network.model.DetailMovieModel
-import com.rizqanmr.moviku.network.model.DiscoverMovieModel
-import com.rizqanmr.moviku.network.model.GenresModel
-import com.rizqanmr.moviku.network.model.ReviewsModel
+import com.rizqanmr.moviku.model.DetailMovieModel
+import com.rizqanmr.moviku.model.DiscoverMovieModel
+import com.rizqanmr.moviku.model.GenresModel
+import com.rizqanmr.moviku.model.ReviewsModel
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(private val remoteDataSource: RemoteDataSource) {
