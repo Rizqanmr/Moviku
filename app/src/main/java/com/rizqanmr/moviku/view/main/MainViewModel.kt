@@ -32,6 +32,7 @@ class MainViewModel @Inject constructor(
     val genres: LiveData<GenresModel> = _genres
     private val _sort = MutableLiveData<Constant.SortType>()
     private val _genreId = MutableLiveData<Int?>()
+    private val _searchQuery = MutableLiveData<String?>()
 
     init {
         _sort.value = Constant.SortType.RANDOM
@@ -51,6 +52,10 @@ class MainViewModel @Inject constructor(
 
     fun setGenreId(genreId: Int?) {
         genreId?.let { _genreId.value = it }
+    }
+
+    fun setSearchQuery(query: String?) {
+        _searchQuery.value = query
     }
 
     @OptIn(ExperimentalPagingApi::class)

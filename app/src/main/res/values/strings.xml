@@ -17,4 +17,6 @@
     <string name="descending">Descending</string>
     <string name="random">Random</string>
     <string name="filter">Filter</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search Movie</string>
 </resources>

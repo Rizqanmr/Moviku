@@ -22,4 +22,7 @@ interface MovieDao {
 
     @RawQuery(observedEntities = [ItemMovieModel::class])
     fun getAllMoviesSortedByTitle(query: SupportSQLiteQuery): PagingSource<Int, ItemMovieModel>
+
+    @Query("SELECT * FROM movies WHERE title LIKE :query")
+    fun searchMovie(query: String): PagingSource<Int, ItemMovieModel>
 }

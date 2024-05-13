@@ -1,12 +1,18 @@
 package com.rizqanmr.moviku.view.main
 
+import android.app.SearchManager
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.PopupMenu
+import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.isVisible
@@ -40,10 +46,18 @@ class MainActivity : AppCompatActivity() {
 
         setupObservers()
         setupViewPage()
+        handleIntent(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
+        val component = ComponentName(this, MainActivity::class.java)
+        val searchableInfo = searchManager.getSearchableInfo(component)
+        searchView.setSearchableInfo(searchableInfo)
+
         return true
     }
 
@@ -159,4 +173,18 @@ class MainActivity : AppCompatActivity() {
 //            tab.text = (viewPagerAdapter.getGenreName(position))
 //        }.attach()
     }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleIntent(intent)
+    }
+
+    private fun handleIntent(intent: Intent) {
+        if (Intent.ACTION_SEARCH == intent.action) {
+            val query = intent.getStringExtra(SearchManager.QUERY)
+            Log.d("SEARCH", "Search query was: $query")
+            //viewModel.setSearchQuery(query)
+        }
+    }
+
 }
