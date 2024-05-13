@@ -1,5 +1,6 @@
 package com.rizqanmr.moviku.view.moviedetail
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -31,6 +32,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
 
     companion object {
+        fun newIntent(activity: Activity, bundle: Bundle?) {
+            activity.startActivity(
+                Intent(activity, MovieDetailActivity::class.java).apply {
+                    bundle?.let { putExtras(it) }
+                }
+            )
+        }
         fun newIntent(fragment: Fragment, bundle: Bundle?) {
             fragment.startActivity(
                 Intent(fragment.context, MovieDetailActivity::class.java).apply {
