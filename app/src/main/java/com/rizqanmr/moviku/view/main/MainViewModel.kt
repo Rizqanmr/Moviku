@@ -31,10 +31,12 @@ class MainViewModel @Inject constructor(
     private val _genres = MutableLiveData<GenresModel>()
     val genres: LiveData<GenresModel> = _genres
     private val _sort = MutableLiveData<Constant.SortType>()
-    private val genreId: Int = 53
+    private val _genreId = MutableLiveData<Int?>()
 
     init {
         _sort.value = Constant.SortType.RANDOM
+        getGenres()
+        _genreId.value = 53
     }
 
     fun getGenres() {
@@ -47,18 +49,24 @@ class MainViewModel @Inject constructor(
         _sort.value = sortType
     }
 
-    @OptIn(ExperimentalPagingApi::class)
-    fun getMovies(): LiveData<PagingData<ItemMovieModel>> = _sort.switchMap { sortType ->
-        val query = SortUtils.getSortedQuery(sortType)
+    fun setGenreId(genreId: Int?) {
+        genreId?.let { _genreId.value = it }
+    }
 
-        Pager(
-            config = PagingConfig(
-                pageSize = 10
-            ),
-            remoteMediator = MovieRemoteMediator(appRepository, database, genreId),
-            pagingSourceFactory = {
-                database.movieDao().getAllMoviesSortedByTitle(query)
+    @OptIn(ExperimentalPagingApi::class)
+    fun getMovies(): LiveData<PagingData<ItemMovieModel>> {
+        return _genreId.switchMap { genreId ->
+            _sort.switchMap { sortType ->
+                val query = SortUtils.getSortedQuery(sortType)
+
+                Pager(
+                    config = PagingConfig(pageSize = 10),
+                    remoteMediator = MovieRemoteMediator(appRepository, database, genreId!!),
+                    pagingSourceFactory = {
+                        database.movieDao().getAllMoviesSortedByTitle(query)
+                    }
+                ).liveData.cachedIn(viewModelScope)
             }
-        ).liveData.cachedIn(viewModelScope)
+        }
     }
 }

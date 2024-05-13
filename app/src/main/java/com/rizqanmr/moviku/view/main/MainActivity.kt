@@ -18,6 +18,8 @@ import com.rizqanmr.moviku.adapter.DiscoverMovieAdapter
 import com.rizqanmr.moviku.adapter.LoadingStateAdapter
 import com.rizqanmr.moviku.databinding.ActivityMainBinding
 import com.rizqanmr.moviku.databinding.ItemMovieBinding
+import com.rizqanmr.moviku.model.GenresItem
+import com.rizqanmr.moviku.model.GenresModel
 import com.rizqanmr.moviku.model.ItemMovieModel
 import com.rizqanmr.moviku.utils.Constant
 import com.rizqanmr.moviku.view.moviedetail.MovieDetailActivity
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val discoverMovieAdapter by lazy { DiscoverMovieAdapter() }
     private val viewModel by viewModels<MainViewModel>()
+    private lateinit var genresModel: GenresModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +40,6 @@ class MainActivity : AppCompatActivity() {
 
         setupObservers()
         setupViewPage()
-        viewModel.getGenres()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -49,6 +51,10 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.menu_sort -> {
                 showSortingPopupMenu()
+                true
+            }
+            R.id.menu_filter -> {
+                showGenresPopupMenu()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -74,31 +80,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showGenresPopupMenu() {
+        val view = findViewById<View>(R.id.menu_filter) ?: return
+        PopupMenu(this, view).run {
+            genresModel.genres?.forEachIndexed { index, genre ->
+                menu.add(0, index, 0, genre.getGenreName())
+            }
+
+            setOnMenuItemClickListener { item ->
+                val genre = genresModel.genres?.get(item.itemId)
+                viewModel.setGenreId(genre?.id)
+                true
+            }
+            show()
+        }
+
+    }
+
 
     private fun setupObservers() {
-//        viewModel.genres.observe(this) {
-//            if (it.genres?.isNotEmpty() == true) {
-//                viewPagerAdapter.setGenre(it.genres)
-//            }
-//        }
-//        viewModel.sortType.observe(this) {
-//            viewPagerAdapter.setSortType(it)
-//        }
+        viewModel.genres.observe(this) {
+            if (it.genres?.isNotEmpty() == true) {
+                genresModel = it
+            }
+        }
         viewModel.getMovies().observe(this) {
             discoverMovieAdapter.submitData(lifecycle, it)
         }
     }
 
     private fun setupViewPage() {
-//        val viewPager = binding.viewPager
-//        val tabLayout = binding.tabLayout
-//
-//        viewPagerAdapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
-//        viewPager.adapter = viewPagerAdapter
-//
-//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-//            tab.text = (viewPagerAdapter.getGenreName(position))
-//        }.attach()
+        genresModel = GenresModel(
+            listOf(GenresItem("Action", 1), GenresItem("Drama", 2))
+        )
 
         with(binding) {
             setSupportActionBar(toolbar)
@@ -134,5 +148,15 @@ class MainActivity : AppCompatActivity() {
                     ?.apply { putParcelable(Constant.EXTRA_MOVIE, movie) })
             }
         })
+
+//        val viewPager = binding.viewPager
+//        val tabLayout = binding.tabLayout
+//
+//        viewPagerAdapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
+//        viewPager.adapter = viewPagerAdapter
+//
+//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+//            tab.text = (viewPagerAdapter.getGenreName(position))
+//        }.attach()
     }
 }
