@@ -5,6 +5,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.RawQuery
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.rizqanmr.moviku.model.ItemMovieModel
 
 @Dao
@@ -17,4 +19,7 @@ interface MovieDao {
 
     @Query("DELETE FROM movies")
     suspend fun deleteAll()
+
+    @RawQuery(observedEntities = [ItemMovieModel::class])
+    fun getAllMoviesSortedByTitle(query: SupportSQLiteQuery): PagingSource<Int, ItemMovieModel>
 }

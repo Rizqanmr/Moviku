@@ -14,7 +14,7 @@ import java.math.*
 data class DiscoverMovieModel(
     @SerializedName("page") val page: Int = 0,
     @SerializedName("total_pages") val totalPages: Int = 0,
-    @SerializedName("results") val results: List<ItemMovieModel>?,
+    @SerializedName("results") val results: List<ItemMovieModel> = emptyList(),
     @SerializedName("total_results") val totalResults: Int = 0
 )
 

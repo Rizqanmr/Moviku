@@ -50,7 +50,7 @@ class MovieRemoteMediator @Inject constructor(
 
         return try {
             val responseData = repository.getDiscoverMovies(page, genreId)
-            val endOfPaginationReached = responseData?.results?.isEmpty() == true
+            val endOfPaginationReached = responseData.results.isEmpty()
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     database.remoteKeysDao().deleteRemoteKeys()
@@ -58,13 +58,11 @@ class MovieRemoteMediator @Inject constructor(
                 }
                 val prevKey = if (page == 1) null else page - 1
                 val nextKey = if (endOfPaginationReached) null else page + 1
-                val keys = responseData?.results?.map {
+                val keys = responseData.results.map {
                     RemoteKeys(id = it.id, prevKey = prevKey, nextKey = nextKey)
                 }
-                if (keys != null) {
-                    database.remoteKeysDao().insertAll(keys)
-                }
-                responseData?.results?.let { database.movieDao().insertMovie(it) }
+                database.remoteKeysDao().insertAll(keys)
+                database.movieDao().insertMovie(responseData.results)
             }
             MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: Exception) {

@@ -28,13 +28,13 @@ class RemoteDataSource @Inject constructor(
         }
     }
 
-    suspend fun getDiscoverMovies(page: Int, genreId: Int) : DiscoverMovieModel? {
+    suspend fun getDiscoverMovies(page: Int, genreId: Int) : DiscoverMovieModel {
         return withContext(coroutineContext) {
             try {
                 val movies = apiService.getDiscoverMovies(page, genreId)
                 movies
             } catch (e: Exception) {
-                null
+                DiscoverMovieModel()
             }
         }
     }

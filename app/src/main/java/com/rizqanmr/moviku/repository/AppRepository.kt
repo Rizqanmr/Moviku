@@ -12,7 +12,7 @@ class AppRepository @Inject constructor(private val remoteDataSource: RemoteData
         return remoteDataSource.getGenres()
     }
 
-    suspend fun getDiscoverMovies(page: Int, genreId: Int) : DiscoverMovieModel? {
+    suspend fun getDiscoverMovies(page: Int, genreId: Int) : DiscoverMovieModel {
         return remoteDataSource.getDiscoverMovies(page, genreId)
     }
 
