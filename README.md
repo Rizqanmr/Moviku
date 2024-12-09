@@ -8,7 +8,17 @@ A movie app using API from [TMDB](https://developer.themoviedb.org/docs/getting-
 - User review
 
 ## Notes
-Before run this project. Go to \app\build.gradle.kts on line 15 and then replace "Enter your API Key" with your API key from the docs themoviedb
+- Download this project
+- Open this project with Android Studio
+- Before build and run this project. Go to local.properties and add 2 lines code:
+
+```
+BASE_URL = "https://api.themoviedb.org/3/"
+API_KEY = "Enter your themoviedb personal access token"
+```
+
+- Sync Project with Gradle File
+- Run
 
 ## Discover Movie
 <img src="https://github.com/Rizqanmr/Moviku/assets/45690865/3479aa1b-f0f6-4dff-955e-d93d9aa85c8d" width="20%" alt="Screenshot_20240207_152723_Moviku"></img>

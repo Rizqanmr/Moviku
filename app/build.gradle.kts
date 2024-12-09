@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,13 +8,22 @@ plugins {
     id("kotlin-parcelize")
 }
 
+//importing local.properties file
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use { input ->
+        localProperties.load(input)
+    }
+}
+
 android {
     namespace = "com.rizqanmr.moviku"
     compileSdk = 34
 
     defaultConfig {
-        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
-        buildConfigField("String", "API_KEY", "\"Enter your API Key\"")
+        buildConfigField("String", "BASE_URL", value = localProperties["BASE_URL"].toString())
+        buildConfigField("String", "API_KEY", value = localProperties["API_KEY"].toString())
         applicationId = "com.rizqanmr.moviku"
         minSdk = 23
         targetSdk = 34
