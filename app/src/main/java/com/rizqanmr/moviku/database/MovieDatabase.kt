@@ -6,7 +6,7 @@ import com.rizqanmr.moviku.model.ItemMovieModel
 
 @Database(
     entities = [ItemMovieModel::class, RemoteKeys::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class MovieDatabase : RoomDatabase() {

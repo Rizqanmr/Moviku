@@ -1,6 +1,7 @@
 package com.rizqanmr.moviku.view.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.rizqanmr.moviku.database.MovieDatabase
 import com.rizqanmr.moviku.model.GenresItem
 import com.rizqanmr.moviku.model.GenresModel
 import com.rizqanmr.moviku.repository.AppRepository
@@ -23,12 +24,13 @@ class MainViewModelTest {
 
     // Mock dependencies
     private lateinit var appRepository: AppRepository
+    private lateinit var database: MovieDatabase
     private lateinit var viewModel: MainViewModel
 
     @Before
     fun setUp() {
         appRepository = mockk()
-        viewModel = MainViewModel(appRepository)
+        viewModel = MainViewModel(appRepository, database)
     }
 
     @Test
