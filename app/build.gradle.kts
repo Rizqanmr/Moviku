@@ -56,6 +56,18 @@ android {
         viewBinding = true
         dataBinding = true
     }
+    packaging {
+        resources {
+            excludes += setOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE-notice.md",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.md",
+                "META-INF/LICENSE",
+                "META-INF/*.kotlin_module"
+            )
+        }
+    }
 }
 
 kapt {
