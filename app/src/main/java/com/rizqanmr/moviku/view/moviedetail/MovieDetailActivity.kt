@@ -13,6 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -109,6 +110,19 @@ class MovieDetailActivity : AppCompatActivity() {
                     header = LoadingStateAdapter { reviewAdapter.retry() }
                 )
             }
+
+            lifecycleScope.launch {
+                reviewAdapter.loadStateFlow.collectLatest { loadState ->
+
+                    val isEmpty =
+                        loadState.refresh is LoadState.NotLoading &&
+                                reviewAdapter.itemCount == 0
+
+                    binding.rvReview.isVisible = !isEmpty
+                    binding.tvEmptyReview.isVisible = isEmpty
+                    binding.tvReadAllReview.isVisible = !isEmpty
+                }
+            }
         }
 
         setupYoutubePlayerView()
@@ -116,18 +130,52 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun setupYoutubePlayerView() {
         val youTubePlayerView: YouTubePlayerView = binding.youtubePlayerView
-
         lifecycle.addObserver(youTubePlayerView)
 
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoItem = detailMovie?.videos?.results?.find { it.type == Constant.TRAILER }
-                val videoId = videoItem?.key.orEmpty()
+                val videoId = getBestTrailer() ?: return
                 youTubePlayer.apply {
                     cueVideo(videoId, 0f)
                 }
             }
+
+            override fun onError(
+                youTubePlayer: YouTubePlayer,
+                error: PlayerConstants.PlayerError
+            ) {
+                val videoId = getBestTrailer() ?: return
+
+                // tampilkan fallback
+                showTrailerWebView(videoId)
+            }
         })
+    }
+
+    private fun getBestTrailer(): String? {
+        val videos = detailMovie?.videos?.results ?: return null
+        val video =
+            videos.firstOrNull { it.type == "Trailer" && it.official && it.site == "YouTube" }
+                ?: videos.firstOrNull { it.type == "Trailer" && it.site == "YouTube" }
+                ?: videos.firstOrNull { it.type == "Teaser" && it.site == "YouTube" }
+                ?: videos.firstOrNull { it.site == "YouTube" }
+
+        return video?.key
+    }
+
+    private fun showTrailerWebView(videoId: String) {
+        binding.youtubePlayerView.visibility = View.GONE
+        binding.webViewTrailer.visibility = View.VISIBLE
+
+        val webView = binding.webViewTrailer
+
+        webView.settings.javaScriptEnabled = true
+        webView.settings.domStorageEnabled = true
+        webView.settings.mediaPlaybackRequiresUserGesture = true
+
+        val url = "https://www.themoviedb.org/video/play?key=$videoId"
+
+        webView.loadUrl(url)
     }
 
 }

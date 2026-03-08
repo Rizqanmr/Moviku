@@ -160,13 +160,29 @@
                 app:layout_constraintStart_toStartOf="@id/ivPoster"
                 app:layout_constraintTop_toBottomOf="@id/tvReleaseDate" />
 
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                android:id="@+id/youtubePlayerView"
+            <FrameLayout
+                android:id="@+id/trailerContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp4"
-                app:autoPlay="false"
-                app:layout_constraintTop_toBottomOf="@id/tvTrailerTitle"/>
+                android:layout_height="0dp"
+                android:paddingTop="@dimen/dp24"
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintTop_toBottomOf="@id/tvTrailerTitle">
+
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youtubePlayerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    app:autoPlay="false" />
+
+                <WebView
+                    android:id="@+id/webViewTrailer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone" />
+
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tvReviewTitle"
@@ -177,7 +193,7 @@
                 android:textSize="@dimen/sp16"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/ivPoster"
-                app:layout_constraintTop_toBottomOf="@id/youtubePlayerView" />
+                app:layout_constraintTop_toBottomOf="@id/trailerContainer" />
 
             <TextView
                 android:id="@+id/tvReadAllReview"
