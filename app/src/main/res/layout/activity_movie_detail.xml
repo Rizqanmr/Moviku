@@ -220,6 +220,19 @@
                 tools:listitem="@layout/item_review"
                 tools:itemCount="1" />
 
+            <TextView
+                android:id="@+id/tvEmptyReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp16"
+                android:text="@string/no_reviews_available"
+                android:textSize="@dimen/sp14"
+                android:textColor="@color/grey"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/tvReviewTitle"
+                app:layout_constraintStart_toStartOf="@id/tvReviewTitle"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

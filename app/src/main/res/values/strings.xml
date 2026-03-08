@@ -12,4 +12,5 @@
     <string name="reviewer_avatar">Reviewer Avatar</string>
     <string name="read_all_review">Read All Review</string>
     <string name="no_data_available">No data available</string>
+    <string name="no_reviews_available">No reviews available</string>
 </resources>
